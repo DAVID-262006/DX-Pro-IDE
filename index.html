@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DX — Pro IDE</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-default">
+
+  <canvas id="bgCanvas" class="bg-canvas"></canvas>
+
+  <div class="app">
+    <div class="topbar glass">
+      <div class="brand">
+        <div class="logo-shape"></div>
+        <div>
+          <div class="title brand-dx">D<span class="unique-x">X</span></div>
+          <div class="subtitle">PRO IDE</div>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="lang-wrap">
+          <select id="language">
+            <option value="python">Python</option>
+            <option value="cpp">C++</option>
+            <option value="c">C</option>
+            <option value="java">Java</option>
+            <option value="javascript">JavaScript</option>
+          </select>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="themeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div id="offlineOverlay" class="offline-overlay hidden">
+        <div class="offline-message glass">
+            <h1>🔌 Offline Error</h1>
+            <p>This Pro IDE requires a **live internet connection** to run code. Please connect to the internet and refresh the page.</p>
+            <p>Code execution services are currently unreachable.</p>
+        </div>
+    </div>
+    <div id="mainContent" class="main hidden">
+      <div class="editor-card glass">
+        <div class="editor-top">
+          <div class="editor-title">Code Editor</div>
+          <div class="editor-actions">
+            <button id="downloadBtn" class="btn btn-ghost">⬇ Download</button> 
+            <button id="runBtn" class="btn btn-primary">▶ Run</button>
+            <button id="clearBtn" class="btn btn-ghost">🧹 Clear</button>
+          </div>
+        </div>
+        <div id="codeLoader" class="code-loader">
+            <div class="skeleton-line full"></div>
+            <div class="skeleton-line half"></div>
+            <div class="skeleton-line small"></div>
+            <div class="skeleton-line quarter"></div>
+            <div class="skeleton-line full"></div>
+            <div class="skeleton-line half"></div>
+            <div class="skeleton-line small"></div>
+            <div class="skeleton-line quarter"></div>
+        </div>
+        <textarea id="codeInput" class="code-area hidden" placeholder="Write your code here..."></textarea>
+        <div class="bottom-row">
+          <span class="status">Language: <span id="currentLang">Python</span></span>
+          <span id="execStats" class="status exec-stats hidden"></span>
+        </div>
+      </div>
+
+      <div class="output-card glass">
+        <div class="output-top">
+          <div class="editor-title">Terminal</div>
+        </div>
+        <div class="output-body">
+           <div id="outputLoader" class="code-loader">
+               <div class="skeleton-line full"></div>
+               <div class="skeleton-line half"></div>
+           </div>
+          <pre id="output" class="output-pre hidden"></pre>
+        </div>
+
+        <div id="inputContainer" class="input-container hidden">
+            <div class="input-title">Standard Input (STDIN)</div>
+            <textarea id="inputArea" class="input-area" placeholder="Enter all required input values (one per line) here before running..."></textarea>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="footer">
+      Powered by <span class="brand-dx">DAV<span class="unique-x">ID</span></span> | 2025
+    </div>
+  </div>
+
+  <script src="snippets.js"></script> 
+  <script src="script.js"></script>
+</body>
+</html>

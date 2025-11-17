@@ -1,0 +1,700 @@
+/* ---------------------------------
+   DX — Pro UI styles
+   Responsive, animated, dark/light themes
+   --------------------------------- */
+
+/* ... (Existing :root and .theme-light variables are unchanged) ... */
+
+:root{
+  --bg1: #071422;
+  --bg2: #0b1b26;
+  --card: rgba(255,255,255,0.04);
+  --glass: rgba(255,255,255,0.03);
+  --muted: #9fb1bb;
+  --accent: #00e6b8; /* Greenish/Cyan for Primary Action */
+  --accent-2: #00b0ff; /* Blue accent */
+  --danger: #ff6b6b;
+  --success: #7af58a;
+  --text: #dff6f0;
+  --shadow: 0 10px 30px rgba(2,6,10,0.6);
+  --radius: 14px;
+  --glass-border: rgba(255,255,255,0.08);
+
+  /* LUXURIOUS BUTTON VARIABLES (Capsule Style) */
+  --btn-radius: 999px; /* Fully rounded capsule */
+  --run-bg: linear-gradient(135deg, #00e6b8, #00b0ff); /* Primary action gradient */
+  --run-glow: 0 0 15px rgba(0, 230, 184, 0.6), 0 0 30px rgba(0, 230, 184, 0.4);
+  --clear-bg: rgba(255, 255, 255, 0.12); /* Subtle clear background */
+  --clear-hover-bg: rgba(255, 255, 255, 0.25);
+  --clear-glow: 0 0 8px rgba(0, 176, 255, 0.4), 0 0 15px rgba(0, 176, 255, 0.2);
+  --btn-text-color: #041a20; /* Dark text for solid buttons */
+  --btn-text-color-alt: var(--text); /* For clear button and download */
+
+  /* BRAND DX LUXURY GLOW (Reduced Glow) */
+  --dx-color: #ff9900; /* Primary orange/gold color */
+  --dx-glow-primary: 0 0 4px #ff9900, 0 0 10px rgba(255, 153, 0, 0.5); /* Reduced glow */
+  --dx-x-color: #e6ffff; /* Secondary white/cyan color for X */
+  --dx-x-glow: 0 0 5px #e6ffff, 0 0 12px rgba(230, 255, 255, 0.5); /* Reduced glow */
+
+
+  /* LANGUAGE SELECTOR VARIABLES */
+  --select-bg: rgba(255, 255, 255, 0.05);
+  --select-hover-bg: rgba(255, 255, 255, 0.1);
+  --select-border-glow: #00b0ff;
+  /* Dropdown colors for dark theme */
+  --dropdown-bg: #1e2a36; 
+  --dropdown-text: var(--text);
+  --dropdown-option-hover-bg: #00b0ff; /* Blue hover for options */
+  --dropdown-option-hover-text: white;
+}
+
+.theme-light {
+  --bg1: #f5f7fb;
+  --bg2: #edf2f7;
+  --card: rgba(0,0,0,0.04);
+  --glass: rgba(255,255,255,0.8);
+  --muted: #475569;
+  --accent: #0ea5a4; /* Teal accent for light theme */
+  --accent-2: #0b78ff;
+  --text: #0b1220;
+  --shadow: 0 8px 30px rgba(6,12,20,0.1);
+  --glass-border: rgba(0,0,0,0.12);
+
+  /* LIGHT THEME LUXURIOUS BUTTON VARIABLES */
+  --run-bg: linear-gradient(135deg, #0ea5a4, #0b78ff);
+  --run-glow: 0 0 12px rgba(14, 165, 164, 0.6), 0 0 25px rgba(14, 165, 164, 0.4);
+  --clear-bg: rgba(0, 0, 0, 0.08);
+  --clear-hover-bg: rgba(0, 0, 0, 0.15);
+  --clear-glow: 0 0 8px rgba(11, 120, 255, 0.4), 0 0 15px rgba(11, 120, 255, 0.2);
+  --btn-text-color: #ffffff; /* White text for solid buttons in light mode */
+  --btn-text-color-alt: var(--text);
+
+  /* BRAND DX LUXURY GLOW (Light Theme Adjustments - Reduced Glow) */
+  --dx-color: #ff8a00; 
+  --dx-glow-primary: 0 0 3px #ff8a00, 0 0 8px rgba(255, 138, 0, 0.4); /* Reduced glow */
+  --dx-x-color: #0b78ff; 
+  --dx-x-glow: 0 0 5px #0b78ff, 0 0 12px rgba(11, 120, 255, 0.4); /* Reduced glow */
+
+  /* LIGHT THEME SELECTOR VARIABLES */
+  --select-bg: rgba(0, 0, 0, 0.05);
+  --select-hover-bg: rgba(0, 0, 0, 0.1);
+  --select-border-glow: #0ea5a4;
+  /* Dropdown colors for light theme */
+  --dropdown-bg: #ffffff;
+  --dropdown-text: var(--text);
+  --dropdown-option-hover-bg: var(--accent-2);
+  --dropdown-option-hover-text: white;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color:var(--text);
+  background: linear-gradient(180deg, var(--bg1), var(--bg2));
+  transition: background 0.6s ease, color 0.4s ease;
+  overflow:hidden;
+}
+
+/* bg canvas fills screen */
+.bg-canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  display:block;
+}
+
+/* app wrapper */
+.app{
+  position:relative;
+  z-index:2;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+/* utility */
+.hidden { display: none !important; }
+
+/* ---------------------------------
+   MANDATORY OFFLINE OVERLAY
+   --------------------------------- */
+.offline-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    text-align: center;
+}
+.offline-message {
+    padding: 40px;
+    max-width: 450px;
+    color: var(--danger);
+    border: 2px solid var(--danger);
+}
+.offline-message h1 {
+    color: var(--text);
+    margin-top: 0;
+}
+/* LIGHT THEME ADJUSTMENT */
+.theme-light .offline-overlay {
+    background: rgba(255, 255, 255, 0.9);
+}
+.theme-light .offline-message {
+    border: 2px solid var(--danger);
+}
+/* --------------------------------- */
+
+/* ---------------------------------
+   SKELETAL LOADING STYLES
+   --------------------------------- */
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.code-loader {
+    width: 100%;
+    min-height: 300px;
+    max-height: 56vh;
+    background: var(--bg1);
+    border-radius: 12px;
+    padding: 14px;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.theme-light .code-loader {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.skeleton-line {
+    height: 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.theme-light .skeleton-line {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.skeleton-line.full { width: 100%; }
+.skeleton-line.half { width: 65%; }
+.skeleton-line.small { width: 40%; }
+.skeleton-line.quarter { width: 25%; }
+/* --------------------------------- */
+
+
+/* topbar */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 28px;
+  gap:12px;
+  backdrop-filter: blur(10px);
+  background: var(--glass);
+  border-bottom:1px solid var(--glass-border);
+  transition: background 0.4s ease;
+}
+
+.brand{display:flex;align-items:center;gap:12px}
+
+/* --- LUXURIOUS DX BRANDING (UNCHANGED) --- */
+.logo-shape{
+  width:46px;height:46px;border-radius:10px;
+  background: linear-gradient(135deg,var(--dx-color),var(--accent-2));
+  /* Enhanced logo shape glow */
+  box-shadow: var(--dx-glow-primary), 0 6px 24px rgba(0,0,0,0.45);
+  transition: all 0.5s ease;
+}
+.title{font-weight:700;font-size:1.05rem}
+.subtitle{font-size:0.75rem;color:var(--muted)}
+
+.brand-dx {
+    font-size: 1.5rem; /* Larger font size for brand */
+    font-weight: 900;
+    color: var(--dx-color);
+    text-shadow: var(--dx-glow-primary);
+    transition: all 0.4s ease;
+}
+
+.unique-x {
+    color: var(--dx-x-color);
+    text-shadow: var(--dx-x-glow);
+    animation: pulseGlow 1.5s infinite alternate; /* Subtle pulse animation */
+    transition: all 0.4s ease;
+    display: inline-block;
+    transform: skewX(-5deg); /* Slight unique slant */
+}
+
+@keyframes pulseGlow {
+    from { opacity: 0.9; text-shadow: var(--dx-x-glow); }
+    to { opacity: 1; text-shadow: var(--dx-x-glow), 0 0 15px rgba(230, 255, 255, 0.1); } /* Less extreme secondary glow */
+}
+/* ------------------------------- */
+
+/* --- LUXURIOUS LANGUAGE SELECTOR (UNCHANGED) --- */
+.controls{display:flex;align-items:center;gap:16px}
+.lang-wrap{
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.lang-wrap::after {
+    /* LUXURIOUS GLOW EFFECT for the entire wrapper */
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 10px;
+    border: 1px solid var(--select-border-glow);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 0 15px var(--select-border-glow);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.lang-wrap:hover::after {
+    opacity: 0.8;
+}
+
+.lang-wrap select{
+  padding:10px 30px 10px 14px;
+  border-radius:10px;
+  border: 1px solid var(--glass-border);
+  background:var(--select-bg);
+  color:var(--text);
+  font-weight:600;
+  font-size: 0.9rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='var(--muted-hex)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  transition: all .3s ease, background 0.6s ease;
+  min-width: 140px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 2;
+
+  --muted-hex: %239fb1bb;
+}
+
+/* --- FIX FOR DROPDOWN OPTIONS WITH CAPSULE STYLE (UNCHANGED) --- */
+.lang-wrap select option {
+    background-color: var(--dropdown-bg);
+    color: var(--dropdown-text);
+    font-weight: 500;
+    padding: 8px 14px;
+    transition: background-color 0.2s ease, color 0.2s ease, border-radius 0.2s ease;
+    margin: 2px 0;
+    border-radius: 6px;
+}
+
+.lang-wrap select option:hover,
+.lang-wrap select option:checked {
+    background-color: var(--dropdown-option-hover-bg);
+    color: var(--dropdown-option-hover-text);
+    box-shadow: 0 0 8px var(--dropdown-option-hover-bg);
+    border-radius: var(--btn-radius);
+    transform: scale(1.02);
+    padding-left: 18px;
+}
+/* ---------------------------------------------------- */
+
+.theme-light .lang-wrap select {
+    --muted-hex: %23475569;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.lang-wrap select:hover{ 
+    background: var(--select-hover-bg); 
+}
+.lang-wrap select:active{
+    transform:scale(0.99); 
+    background: var(--select-hover-bg);
+}
+
+/* --- THEME TOGGLE (UNCHANGED) --- */
+.switch{position:relative;display:inline-block;width:60px;height:32px}
+.switch input{display:none}
+.slider{
+  position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(90deg,#1e2a36,#0e151e); 
+  border-radius:999px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.3);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+}
+.slider:before{
+  content:'';
+  position:absolute;
+  width:26px;height:26px;border-radius:50%;
+  left:3px; top:3px; 
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.slider:after {
+    content: "🌙"; 
+    position: absolute;
+    right: 6px;
+    font-size: 14px;
+    line-height: 32px;
+    color: var(--text);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1;
+    z-index: 10;
+}
+.switch input:checked + .slider{
+  background: linear-gradient(90deg, #ffde54, #ff8a00);
+  box-shadow: inset 0 0 10px rgba(255,140,0,0.4), 0 2px 4px rgba(0,0,0,0.1);
+}
+.switch input:checked + .slider:before{ 
+  transform: translateX(28px); 
+  background: linear-gradient(135deg, #ffe57f, #ffc300);
+  box-shadow: 0 4px 12px rgba(255,140,0,0.4);
+}
+.switch input:checked + .slider:after {
+    content: "☀️";
+    color: #fff;
+    opacity: 0.8;
+    transform: translateX(-30px);
+}
+
+/* main layout */
+.main{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:20px;
+  padding:28px;
+  align-items:start;
+  flex:1;
+  overflow:auto;
+  transition: opacity 0.3s ease;
+}
+
+/* glass cards */
+.glass{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow: var(--shadow);
+  border:1px solid var(--glass-border);
+  transition: transform .25s ease, box-shadow .25s ease, background-color .6s ease;
+}
+.glass:hover{ 
+    transform: translateY(-4px); 
+    box-shadow: 0 16px 40px rgba(0,0,0,0.65);
+}
+
+/* editor card */
+.editor-card{ display:flex; flex-direction:column; min-height:480px; }
+.editor-top{ display:flex; align-items:center; justify-content:space-between;margin-bottom:12px; gap:12px}
+.editor-title{ font-weight:700; font-size:1.05rem }
+.editor-actions{ display:flex; gap:18px; align-items:center }
+
+/* --- LUXURIOUS CAPSULE BUTTONS (UNCHANGED) --- */
+.btn{ 
+  padding:10px 24px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  letter-spacing: 1px;
+  border-radius: var(--btn-radius);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+.btn:hover{ 
+    transform: translateY(-2px); 
+}
+.btn:active{ 
+    transform: translateY(0.5px) scale(0.98); 
+    filter: brightness(0.9);
+}
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none !important;
+}
+
+/* Primary Button (Run) - Glowing Capsule */
+.btn-primary{ 
+  background: var(--run-bg);
+  color: var(--btn-text-color); 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+.btn-primary:hover{
+    box-shadow: var(--run-glow);
+}
+
+/* Ghost Button (Clear/Download) - Subtle Glowing Capsule */
+.btn-ghost{ 
+  background: var(--clear-bg);
+  color: var(--btn-text-color-alt); 
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.btn-ghost:hover{
+    background: var(--clear-hover-bg);
+    box-shadow: var(--clear-glow);
+}
+
+/* Button click "light-sprint" effect (for solid buttons) */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: all 0.6s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    z-index: 0;
+}
+.btn:active::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    transition: all 0.05s ease;
+}
+
+
+/* code area */
+.code-area{
+  width:100%;
+  min-height:300px;
+  max-height:56vh;
+  background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.01), transparent), #030a10;
+  color: #e6ffff;
+  resize:vertical;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.06);
+  padding:14px;font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-size:14px; line-height:1.45; outline:none; caret-color:var(--accent);
+  box-shadow: inset 0 -20px 60px rgba(0,0,0,0.6);
+  transition: box-shadow .3s ease, border-color .3s ease;
+}
+
+/* CODE AREA FOCUS EFFECT (UNCHANGED) */
+.code-area:focus{ 
+    border-color: var(--accent-2); /* Blue border on focus */
+    box-shadow: 
+        0 0 10px rgba(0, 176, 255, 0.5), /* Outer blue glow */
+        inset 0 0 10px rgba(0, 176, 255, 0.3); /* Inner blue glow */
+}
+
+
+.theme-light .code-area {
+    background: #ffffff;
+    color: var(--text);
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: none; /* Reset shadow for light theme base */
+}
+
+/* LIGHT THEME CODE AREA FOCUS */
+.theme-light .code-area:focus {
+    border-color: var(--accent-2); /* Blue border on focus */
+    box-shadow: 
+        0 0 10px rgba(11, 120, 255, 0.5), 
+        inset 0 0 10px rgba(11, 120, 255, 0.2);
+}
+
+
+/* bottom row (UNCHANGED) */
+.bottom-row{ display:flex; justify-content:space-between; align-items:center; margin-top:12px; color:var(--muted) }
+.status{ 
+    padding:6px 12px;
+    border-radius:8px;
+    /* Updated background/border for better visibility */
+    background: var(--bg2); 
+    font-weight:600; 
+    color:var(--muted);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+.theme-light .status {
+    background: var(--bg2); 
+    color: var(--muted);
+}
+
+/* Style for Execution Stats (Time/Memory) */
+.exec-stats {
+    background: var(--accent);
+    color: var(--bg1);
+    font-weight: 800;
+    box-shadow: 0 0 8px rgba(0, 230, 184, 0.5);
+}
+.theme-light .exec-stats {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 8px rgba(14, 165, 164, 0.5);
+}
+
+
+/* output card */
+.output-card{ min-height:480px; display:flex; flex-direction:column; }
+.output-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.output-body{ 
+    flex:1; 
+    overflow:auto; 
+    background: #000000; 
+    border-radius:10px; 
+    padding:12px; 
+    border:1px solid rgba(255,255,255,0.06);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+}
+.theme-light .output-body {
+    background: #f0f0ff;
+    color: var(--text);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.output-pre{ 
+  font-family: 'JetBrains Mono', monospace; 
+  font-size:13px; 
+  color: #bfffe8;
+  white-space:pre-wrap; 
+  word-break:break-word; 
+  outline:none;
+  caret-color: var(--accent);
+}
+.theme-light .output-pre {
+    color: #2c3e50;
+}
+
+
+/* --- DEDICATED INPUT AREA STYLES (UNCHANGED) --- */
+
+.input-container {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out, margin 0.3s ease-out;
+    max-height: 200px; 
+    opacity: 1;
+    overflow: hidden;
+}
+
+/* HIDDEN CLASS */
+/* Note: Using !important here for max-height/padding/margin for the dynamic logic to override CSS */
+/* The general .hidden class for the content is defined above */
+.input-container.hidden {
+    max-height: 0 !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    border-top: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+.input-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 6px;
+    text-shadow: 0 0 4px rgba(0, 230, 184, 0.3);
+}
+
+.input-area {
+    width: 100%;
+    min-height: 80px;
+    background: rgba(0, 0, 0, 0.4); 
+    color: #ffd7aa; 
+    resize: vertical;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    padding: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.45;
+    outline: none;
+    caret-color: #ffd7aa;
+    box-shadow: 0 0 8px rgba(0, 230, 184, 0.15) inset;
+    transition: all 0.3s ease;
+}
+
+/* INPUT AREA FOCUS EFFECT (UNCHANGED) */
+.input-area:focus {
+    border-color: var(--accent-2);
+    box-shadow: 
+        0 0 10px rgba(0, 176, 255, 0.5), 
+        inset 0 0 10px rgba(0, 176, 255, 0.3);
+}
+
+/* LIGHT THEME INPUT AREA FOCUS */
+.theme-light .input-area {
+    background: #ffffff;
+    color: #0b1220;
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 8px rgba(0, 176, 255, 0.15) inset;
+}
+
+.theme-light .input-area:focus {
+    border-color: var(--accent-2);
+    box-shadow: 
+        0 0 10px rgba(11, 120, 255, 0.5), 
+        inset 0 0 10px rgba(11, 120, 255, 0.2);
+}
+
+
+/* small buttons (UNCHANGED) */
+.mini{ background: rgba(255,255,255,0.08); border-radius:8px; padding:8px 10px; border:none; cursor:pointer; transition: transform .12s; }
+.mini:active{ transform: translateY(1px) }
+
+/* footer (UNCHANGED) */
+.footer{ padding:12px; text-align:center; color:var(--muted); font-size:13px }
+
+/* small screens (UNCHANGED) */
+@media (max-width:900px){
+  .main{ grid-template-columns: 1fr; padding:16px; overflow:auto; }
+  .output-card{ order:2; margin-top:14px; }
+  .editor-card{ order:1; }
+  
+  /* UPGRADE: Reduce font size and adjust max-height for better mobile viewing */
+  .code-area {
+      font-size: 13px;
+      padding: 10px;
+      max-height: 50vh; /* Allow max height to take up less screen space */
+  }
+  .output-pre {
+      font-size: 12px;
+  }
+}
+
+/* subtle entry animations (UNCHANGED) */
+@keyframes floatIn {
+  from { opacity:0; transform: translateY(8px) scale(.995) }
+  to { opacity:1; transform: translateY(0) scale(1) }
+}
+.editor-card, .output-card { animation: floatIn .35s cubic-bezier(.2,.25,1) both; }
+
+/* small helper for code download highlight (UNCHANGED) */
+code{ background: rgba(0,0,0,0.06); padding:2px 6px; border-radius:6px; font-family:monospace; }
